@@ -78,20 +78,8 @@ public class Assignment1 {
         String iVFileContentFiller = toHexForFileWriting(iV);
         Files.write(Paths.get("IV.txt"), iVFileContentFiller.getBytes());
 
-        // takes the binaryBytes from Assignment1.class and gives the filename Encryption.txt to encrypt to, also allows user the choice whether they'd like to see it on screen
-        System.out.println("If you wish to see the encrypted hexadecimal in your terminal, type yes! otherwise type anything else");
-        Scanner myObj = new Scanner(System.in);
-        String choice = myObj.nextLine();
-
-        if (choice.equals("yes") || choice.equals("yes!") || choice.equals("Y") || choice.equals("y")) {
-            System.out.println(encrypt(args[2], binaryFileBytes, k, iV));
-            System.out.println("you will also find the encryption and the other values in the text files");
-        }
-        else{
-            System.out.println("Check the documents for, what hopefully was, a successful encryption!");
-            encrypt(args[2], binaryFileBytes, k, iV);
-        }
-
+        // takes the binaryBytes from Assignment1.class and gives the filename Encryption.txt to encrypt to
+        System.out.println(encrypt(args[0], binaryFileBytes, k, iV));
 
     }
 
@@ -152,7 +140,7 @@ public class Assignment1 {
                 e1.printStackTrace();
             }
 
-            // return a string in case the user wants to see it
+            // return the string to print to file
             return finalEncryption;
         }
         catch (Exception e)
