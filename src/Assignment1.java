@@ -110,7 +110,7 @@ public class Assignment1 {
     }
 
 
-    // fucking make sure to get this
+    // The main function for encrypting the .class file contents
     public static String encrypt(String fileName, byte[] fileContents, SecretKey secretKey, byte[] iV) throws Exception {
 
         // We have our own 128-bit iV preselected therefore we select the parameterSpec and move on to add custom padding to our binaryByte data from Assignment1.class
@@ -126,7 +126,7 @@ public class Assignment1 {
             byte[] encrypted = cipher.doFinal(finalFormatFile);
 
             try {
-                // gets the 2nd positional argument which is the filename and writes a human readable hex to it
+                // gets the 1st positional argument which is the filename and writes a human readable hex to it
                 BigInteger finalHexValue = new BigInteger( DatatypeConverter.printHexBinary(encrypted), 16);
                 finalEncryption = toHexForFileWriting(finalHexValue.toByteArray());
                 Files.write(Paths.get("".concat(fileName)), Collections.singleton(finalEncryption));
@@ -140,7 +140,7 @@ public class Assignment1 {
                 e1.printStackTrace();
             }
 
-            // return the string to print to file
+            // return the string to print to the file
             return finalEncryption;
         }
         catch (Exception e)
@@ -167,13 +167,12 @@ public class Assignment1 {
         // as they both get a 1-bit followed by 0-bits, we can just create a size limit to calculate how many 0-bits are appended
         byte[] addedBytes = Arrays.copyOf(fileToPad, fileToPad.length + paddingBytesNeeded);
 
-        // FUCK SHIT FUCK MY ASSHOLE
+        // add byte which has a leading one followed by however many 0-bits are needed
         addedBytes[fileToPad.length] = (byte) Integer.parseInt("10000000", 2);
 
         return addedBytes;
     }
 
-    // Have to know how to explain this...
     // munches and digests a part of the shared secret s by creating a 256-bit digest to later make the AES key k ourselves.
     public static byte[] fromBigIntegerToHexByteArray(BigInteger s) {
 
